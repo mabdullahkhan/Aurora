@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="AURORA — an offline-first astronaut health self-assessment and explainable decision-support prototype." />
+<title>AURORA | Mission Health Console</title>
+<style>
+:root{--bg:#07121d;--panel:#0d1d2b;--panel2:#112638;--line:#21394c;--muted:#91a7b8;--text:#e8f1f7;--teal:#55d6c2;--cyan:#74c8ff;--amber:#ffc56b;--red:#ff777e;--green:#70deb2;--shadow:0 18px 45px rgba(0,0,0,.28)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 85% -10%,rgba(55,151,183,.16),transparent 32%),linear-gradient(180deg,#07121d,#081725 58%,#07121d);color:var(--text);font:15px/1.5 Inter,Segoe UI,Arial,sans-serif}
+a{color:var(--cyan);text-decoration:none}a:hover{text-decoration:underline}.shell{max-width:1440px;margin:auto;padding:22px 26px 42px}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:6px 0 22px;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:12px}.brandmark{width:42px;height:42px;border:1px solid rgba(85,214,194,.5);border-radius:13px;display:grid;place-items:center;color:var(--teal);font-weight:800;font-size:19px;box-shadow:0 0 22px rgba(85,214,194,.12)}.brand h1{font-size:18px;letter-spacing:.18em;margin:0}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:.14em;margin-top:1px}.topright{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.pill{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:rgba(17,38,56,.85);padding:7px 11px;border-radius:99px;color:#c5d7e3;font-size:11px;letter-spacing:.04em}.dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 9px rgba(112,222,178,.8)}.hero{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;padding:25px 0 20px}.eyebrow{color:var(--teal);font-size:10px;letter-spacing:.2em;text-transform:uppercase;font-weight:700}.hero h2{font-size:clamp(25px,4vw,38px);line-height:1.06;margin:7px 0 8px;letter-spacing:-.03em}.hero p{color:var(--muted);margin:0;max-width:760px}.datebox{text-align:right;color:var(--muted);font-size:12px;min-width:160px}.datebox strong{display:block;color:#d8e6ef;font-size:15px}.grid{display:grid;grid-template-columns:1.5fr 1fr;gap:16px}.leftcol,.rightcol{display:grid;gap:16px;align-content:start}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.card{background:linear-gradient(160deg,rgba(17,38,56,.98),rgba(11,27,41,.98));border:1px solid var(--line);border-radius:16px;padding:17px;box-shadow:var(--shadow)}.metric{min-height:118px;position:relative;overflow:hidden}.metric:after{content:"";position:absolute;right:-20px;top:-25px;width:86px;height:86px;border-radius:50%;background:rgba(85,214,194,.055)}.metric .label{color:var(--muted);font-size:11px;letter-spacing:.08em;text-transform:uppercase}.metric .value{font-size:28px;font-weight:700;letter-spacing:-.04em;margin:7px 0 3px}.metric .unit{font-size:12px;color:var(--muted);font-weight:500}.metric .sub{font-size:11px;color:#a9c0ce}.sectionhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:13px}.sectionhead h3{font-size:15px;margin:0;letter-spacing:.01em}.sectionhead small{font-size:10px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}.chart{width:100%;height:120px;display:block}.chart-labels{display:flex;justify-content:space-between;color:var(--muted);font-size:10px;margin-top:4px}.alert{border-radius:13px;padding:14px;border:1px solid rgba(255,197,107,.35);background:rgba(255,197,107,.07)}.alert.red{border-color:rgba(255,119,126,.45);background:rgba(255,119,126,.08)}.alert.green{border-color:rgba(112,222,178,.3);background:rgba(112,222,178,.06)}.alerttop{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}.alerttitle{font-weight:700;font-size:13px}.status{font-size:10px;letter-spacing:.1em;text-transform:uppercase;border-radius:99px;padding:4px 8px;background:rgba(255,197,107,.15);color:var(--amber)}.status.red{background:rgba(255,119,126,.15);color:var(--red)}.status.green{background:rgba(112,222,178,.12);color:var(--green)}.alert p{margin:5px 0 0;color:#c4d4df;font-size:12px}.formgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}.field label{display:block;font-size:11px;color:var(--muted);margin-bottom:5px}.field input,.field select{width:100%;padding:10px 11px;border:1px solid #2a465b;border-radius:9px;background:#091a28;color:var(--text);font:inherit;outline:none}.field input:focus,.field select:focus{border-color:var(--teal);box-shadow:0 0 0 2px rgba(85,214,194,.12)}.field .hint{font-size:10px;color:#70899a;margin-top:4px}.symptoms{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:10px 0}.check{display:flex;align-items:flex-start;gap:8px;padding:9px;border:1px solid #263e51;border-radius:9px;background:rgba(8,24,37,.5);font-size:11px;color:#c8d8e1}.check input{accent-color:var(--teal);margin-top:2px}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}.btn{border:1px solid #31566b;background:#123247;color:#e5f6fa;padding:10px 14px;border-radius:9px;font:600 12px/1.2 Inter,Segoe UI,Arial,sans-serif;cursor:pointer}.btn.primary{border-color:rgba(85,214,194,.55);background:linear-gradient(100deg,#126b68,#15516b);color:#f2fffd}.btn.ghost{background:transparent;color:#adc5d3}.btn:hover{filter:brightness(1.12)}.btn:focus-visible{outline:2px solid var(--teal);outline-offset:2px}.hazards{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.hazard{border:1px solid var(--line);border-radius:11px;padding:11px;background:rgba(7,21,33,.55)}.hazard b{display:block;font-size:11px;color:#dbe8ef;margin-bottom:3px}.hazard span{font-size:10px;color:var(--muted)}.source{padding:12px;border:1px solid var(--line);border-radius:11px;background:rgba(7,21,33,.5);margin-top:9px}.source b{display:block;font-size:12px;margin-bottom:3px}.source p{font-size:10px;color:var(--muted);margin:0 0 5px}.source a{font-size:10px}.data-row{display:flex;gap:9px;flex-wrap:wrap;margin-top:10px}.data-chip{padding:8px 10px;border-radius:8px;background:#091a28;border:1px solid #28465a;font-size:10px;color:#c8dbe6}.data-chip strong{display:block;font-size:15px;color:var(--teal);font-variant-numeric:tabular-nums}.foot{border-top:1px solid var(--line);margin-top:20px;padding-top:14px;color:#71899a;font-size:10px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.smallnote{font-size:10px;color:var(--muted)}.result{margin-top:12px;display:none}.result.show{display:block}.report{white-space:pre-wrap;background:#06131e;border:1px solid #29475c;padding:12px;border-radius:10px;color:#cfe0e9;font:11px/1.55 ui-monospace,Consolas,monospace;max-height:220px;overflow:auto}.sourcebanner{padding:10px 12px;background:rgba(116,200,255,.06);border:1px solid rgba(116,200,255,.25);border-radius:10px;color:#c2d9e8;font-size:10px;margin-top:12px}
+@media(max-width:900px){.grid{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(3,1fr)}}@media(max-width:620px){.shell{padding:14px}.hero{display:block}.datebox{text-align:left;margin-top:12px}.metrics{grid-template-columns:repeat(2,1fr)}.formgrid,.symptoms,.hazards{grid-template-columns:1fr}.top{align-items:flex-start}.topright{justify-content:flex-end}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="top">
+  <div class="brand"><div class="brandmark">A</div><div><h1>AURORA</h1><small>MISSION HEALTH CONSOLE · PROTOTYPE</small></div></div>
+  <div class="topright"><span class="pill"><i class="dot"></i> LOCAL DEMO MODE</span><span class="pill">OFFLINE-FIRST CONCEPT</span><span class="pill">CREW PROFILE: DEMO-01</span></div>
+</header>
+<section class="hero">
+  <div><div class="eyebrow">Crew health / daily status</div><h2>See the signal. Act with confidence.</h2><p>A personal health check-in that connects body signals with mission context and turns unusual changes into clear, explainable next steps.</p></div>
+  <div class="datebox"><strong id="today">Mission day 084</strong><span>ILLUSTRATIVE CREW DATA · NOT REAL PATIENT DATA</span></div>
+</section>
+<main class="grid">
+  <section class="leftcol">
+    <div class="metrics">
+      <div class="card metric"><div class="label">Heart rate</div><div class="value">72 <span class="unit">bpm</span></div><div class="sub">Demo snapshot · resting</div></div>
+      <div class="card metric"><div class="label">Blood pressure</div><div class="value">118/76</div><div class="sub">mmHg · demo snapshot</div></div>
+      <div class="card metric"><div class="label">Body temperature</div><div class="value">36.8 <span class="unit">°C</span></div><div class="sub">Digital thermometer</div></div>
+      <div class="card metric"><div class="label">Blood glucose</div><div class="value">96 <span class="unit">mg/dL</span></div><div class="sub">Demo value · device/manual</div></div>
+      <div class="card metric"><div class="label">Sleep</div><div class="value">5.8 <span class="unit">hours</span></div><div class="sub">Below the demo baseline</div></div>
+      <div class="card metric"><div class="label">Mood</div><div class="value">3 <span class="unit">/ 5</span></div><div class="sub">Self-reported check-in</div></div>
+    </div>
+    <div class="card">
+      <div class="sectionhead"><h3>Personal trend — sleep duration</h3><small>Illustrative 7-day series</small></div>
+      <svg class="chart" viewBox="0 0 700 125" role="img" aria-label="Illustrative sleep trend chart over seven days">
+        <defs><linearGradient id="area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#55d6c2" stop-opacity=".23"/><stop offset="1" stop-color="#55d6c2" stop-opacity="0"/></linearGradient></defs>
+        <g stroke="#294253" stroke-width="1"><path d="M30 20H685M30 55H685M30 90H685" stroke-dasharray="4 5"/></g>
+        <path d="M30 77 L138 54 L246 67 L354 43 L462 60 L570 84 L678 62 L678 108 L30 108 Z" fill="url(#area)"/>
+        <path d="M30 77 L138 54 L246 67 L354 43 L462 60 L570 84 L678 62" fill="none" stroke="#55d6c2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <g fill="#55d6c2" stroke="#0d1d2b" stroke-width="3"><circle cx="30" cy="77" r="5"/><circle cx="138" cy="54" r="5"/><circle cx="246" cy="67" r="5"/><circle cx="354" cy="43" r="5"/><circle cx="462" cy="60" r="5"/><circle cx="570" cy="84" r="5"/><circle cx="678" cy="62" r="5"/></g>
+        <g fill="#90a8b7" font-size="10"><text x="30" y="122">D-6</text><text x="138" y="122">D-5</text><text x="246" y="122">D-4</text><text x="354" y="122">D-3</text><text x="462" y="122">D-2</text><text x="570" y="122">D-1</text><text x="678" y="122" text-anchor="end">TODAY</text></g>
+      </svg>
+      <div class="smallnote">Trend visualization is illustrative. Production comparisons should use a verified preflight personal baseline and mission-approved thresholds.</div>
+    </div>
+    <div class="card" id="checkin">
+      <div class="sectionhead"><h3>Daily self-assessment</h3><small>Target workflow · 90 seconds</small></div>
+      <div class="formgrid">
+        <div class="field"><label for="hr">Heart rate (bpm)</label><input id="hr" type="number" min="20" max="250" value="72" /></div>
+        <div class="field"><label for="bp">Blood pressure (mmHg)</label><input id="bp" type="text" value="118/76" /></div>
+        <div class="field"><label for="temp">Body temperature (°C)</label><input id="temp" type="number" step="0.1" value="36.8" /></div>
+        <div class="field"><label for="glucose">Blood glucose (mg/dL)</label><input id="glucose" type="number" step="1" value="96" /></div>
+        <div class="field"><label for="sleep">Sleep duration (hours)</label><input id="sleep" type="number" min="0" max="24" step="0.1" value="5.8" /></div>
+        <div class="field"><label for="mood">Mood / stress check</label><select id="mood"><option value="1">1 — Very low</option><option value="2">2 — Low</option><option value="3" selected>3 — Neutral</option><option value="4">4 — Good</option><option value="5">5 — Very good</option></select></div>
+      </div>
+      <div class="sectionhead" style="margin-top:17px"><h3>Symptoms observed</h3><small>Select all that apply</small></div>
+      <div class="symptoms">
+        <label class="check"><input type="checkbox" value="Fever or chills" class="symptom"/>Fever or chills</label>
+        <label class="check"><input type="checkbox" value="Unusual rash or itching" class="symptom"/>Unusual rash or itching</label>
+        <label class="check"><input type="checkbox" value="Cold sore or skin lesion" class="symptom"/>Cold sore or skin lesion</label>
+        <label class="check"><input type="checkbox" value="Sore throat or cough" class="symptom"/>Sore throat or cough</label>
+        <label class="check"><input type="checkbox" value="Unusual fatigue" class="symptom"/>Unusual fatigue</label>
+        <label class="check"><input type="checkbox" value="Chest pain" class="symptom emergency"/>Chest pain</label>
+        <label class="check"><input type="checkbox" value="Severe breathlessness" class="symptom emergency"/>Severe breathlessness</label>
+        <label class="check"><input type="checkbox" value="Fainting or confusion" class="symptom emergency"/>Fainting or confusion</label>
+      </div>
+      <div class="field"><label for="notes">Crew note (optional)</label><input id="notes" type="text" placeholder="e.g., symptoms began after exercise period" /></div>
+      <div class="actions"><button class="btn primary" id="assess">Generate health check summary</button><button class="btn ghost" id="reset">Reset demo</button></div>
+      <div id="result" class="result">
+        <div class="alert" id="alertbox"><div class="alerttop"><span class="alerttitle" id="alerttitle">Assessment summary</span><span class="status" id="alertstatus">WATCH</span></div><p id="alerttext"></p></div>
+        <div class="actions"><button class="btn" id="export">Export flight-surgeon handoff (.txt)</button></div>
+        <div class="report" id="report" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+  <aside class="rightcol">
+    <div class="card">
+      <div class="sectionhead"><h3>Mission-context lens</h3><small>Five hazards</small></div>
+      <div class="hazards">
+        <div class="hazard"><b>01 · Radiation</b><span>Archived dose-rate telemetry from NASA RadLab</span></div>
+        <div class="hazard"><b>02 · Altered gravity</b><span>Physiological adaptation and cardiovascular monitoring</span></div>
+        <div class="hazard"><b>03 · Isolation</b><span>Mood, stress, sleep and team check-ins</span></div>
+        <div class="hazard"><b>04 · Distance from Earth</b><span>Offline protocols and delayed handoff workflow</span></div>
+        <div class="hazard" style="grid-column:1/-1"><b>05 · Hostile closed environment</b><span>Cabin CO₂, temperature, humidity and radiation context from NASA environmental data resources</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sectionhead"><h3>Immune-health watch</h3><small>Non-diagnostic</small></div>
+      <div class="alert green"><div class="alerttop"><span class="alerttitle">No active symptom alert</span><span class="status green">ROUTINE</span></div><p>Demo state only. A normal check-in does not rule out immune changes. Continue scheduled monitoring and use the approved crew medical protocol.</p></div>
+      <div class="sourcebanner">NASA HRP identifies altered immune responses, cytokine and immune-cell changes, latent-virus reactivation, rashes and infections as research and operational concerns.</div>
+    </div>
+    <div class="card">
+      <div class="sectionhead"><h3>NASA data in context</h3><small>Verified public sources</small></div>
+      <div class="data-chip" style="display:block"><strong>9.82 μGy/h</strong>DosTel1 · ISS · 2022-04-01 23:00</div>
+      <div class="data-chip" style="display:block;margin-top:7px"><strong>10.22 μGy/h</strong>DosTel2 · ISS · 2022-04-01 23:00</div>
+      <p class="smallnote" style="margin:8px 0 0">These are two example rows from a historical NASA RadLab API query, not current or crew-specific exposure readings.</p>
+      <div class="source">
+        <b>NASA RadLab — radiation telemetry</b><p>ISS instrument measurements, including absorbed dose rate in μGy/hour.</p><a href="https://visualization.osdr.nasa.gov/radlab/gui/overview/" target="_blank" rel="noopener">Explore RadLab ↗</a>
+      </div>
+      <div class="source">
+        <b>NASA OSDR — human spaceflight biology</b><p>Open datasets for astronaut saliva, blood serum, urine and other biospecimens.</p><a href="https://osdr.nasa.gov/bio/repo/" target="_blank" rel="noopener">Explore OSDR ↗</a>
+      </div>
+      <div class="source">
+        <b>NASA Environmental Data App</b><p>ISS mission environmental telemetry: temperature, CO₂, relative humidity and radiation.</p><a href="https://visualization.osdr.nasa.gov/eda/" target="_blank" rel="noopener">Explore EDA ↗</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sectionhead"><h3>Evidence library</h3><small>Traceable research</small></div>
+      <div class="source"><b>OSD-575 · Inspiration4 blood serum</b><p>Human serum; immune/cardiac cytokine multiplex and metabolic panel; preflight and postflight samples.</p><a href="https://osdr.nasa.gov/bio/repo/data/studies/OSD-575" target="_blank" rel="noopener">Open study ↗</a></div>
+      <div class="source"><b>OSD-656 · Inspiration4 urine</b><p>Urine inflammation panel; 203 inflammatory, cytokine and chemokine proteins quantified.</p><a href="https://osdr.nasa.gov/bio/repo/data/studies/OSD-656" target="_blank" rel="noopener">Open study ↗</a></div>
+      <div class="source"><b>OSD-280 · Astronaut saliva microbiome</b><p>Longitudinal saliva samples from 10 astronauts, including in-flight timepoints; microbiome study with viral-reactivation context.</p><a href="https://osdr.nasa.gov/bio/repo/data/studies/OSD-280" target="_blank" rel="noopener">Open study ↗</a></div>
+    </div>
+  </aside>
+</main>
+<footer class="foot"><span>AURORA · Hackathon prototype · No real astronaut data collected</span><span>Not a medical device · No diagnosis · No treatment prescription · Follow mission medical protocols</span></footer>
+</div>
+<script>
+const $ = (id)=>document.getElementById(id);
+let lastReport = '';
+function collected(){return {heartRate:$('hr').value,bloodPressure:$('bp').value,temperature:$('temp').value,glucose:$('glucose').value,sleep:$('sleep').value,mood:$('mood').value,symptoms:[...document.querySelectorAll('.symptom:checked')].map(x=>x.value),notes:$('notes').value.trim()}}
+function assessment(){
+ const d=collected(); const emergency=d.symptoms.some(s=>['Chest pain','Severe breathlessness','Fainting or confusion'].includes(s));
+ const immune=d.symptoms.filter(s=>!['Chest pain','Severe breathlessness','Fainting or confusion'].includes(s));
+ let level='ROUTINE', cls='green', title='Routine check-in recorded';
+ let message='No symptoms were selected. Continue scheduled monitoring. This result cannot rule out an illness or immune-system change.';
+ if(immune.length){level='WATCH';cls='';title='Symptoms need follow-up';message='One or more symptoms were reported. Record onset and progression, repeat relevant measurements according to the mission protocol, and notify the crew medical officer as required. AURORA cannot determine the cause.';}
+ if(emergency){level='URGENT';cls='red';title='Emergency symptom selected';message='Follow the mission emergency medical protocol immediately and contact the onboard medical officer / flight surgeon. Do not wait for this software or an AI-generated explanation.';}
+ const date=new Date().toISOString();
+ const lines=[
+ 'AURORA — CREW HEALTH HANDOFF (DEMO)',
+ 'Timestamp: '+date,
+ 'Profile: DEMO-01 | Mission day 084 (illustrative)',
+ 'Assessment state: '+level,
+ '',
+ 'MEASUREMENTS (user-entered demo values)',
+ 'Heart rate: '+d.heartRate+' bpm',
+ 'Blood pressure: '+d.bloodPressure+' mmHg',
+ 'Body temperature: '+d.temperature+' °C',
+ 'Blood glucose: '+d.glucose+' mg/dL',
+ 'Sleep: '+d.sleep+' hours',
+ 'Mood: '+d.mood+'/5',
+ 'Symptoms: '+(d.symptoms.join('; ')||'None selected'),
+ 'Crew note: '+(d.notes||'None'),
+ '',
+ 'RULE-BASED OUTPUT',
+ message,
+ '',
+ 'SAFETY: This prototype is not a medical device. It does not diagnose, prescribe, or replace mission medical protocols. All values are illustrative.'
+ ];
+ lastReport=lines.join('\n');
+ $('alertbox').className='alert '+cls;
+ $('alerttitle').textContent=title;
+ $('alertstatus').textContent=level;
+ $('alertstatus').className='status '+cls;
+ $('alerttext').textContent=message;
+ $('report').textContent=lastReport;
+ $('result').classList.add('show');
+}
+$('assess').addEventListener('click',assessment);
+$('reset').addEventListener('click',()=>{ $('hr').value=72;$('bp').value='118/76';$('temp').value=36.8;$('glucose').value=96;$('sleep').value=5.8;$('mood').value=3;$('notes').value='';document.querySelectorAll('.symptom').forEach(x=>x.checked=false);$('result').classList.remove('show');lastReport='';});
+$('export').addEventListener('click',()=>{if(!lastReport)return;const blob=new Blob([lastReport],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='AURORA_demo_handoff.txt';a.click();URL.revokeObjectURL(url);});
+$('today').textContent='Mission day 084 · '+new Date().toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'});
+</script>
+</body>
+</html>
